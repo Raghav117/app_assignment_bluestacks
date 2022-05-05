@@ -15,6 +15,19 @@ class _LoginScreeenState extends State<LoginScreeen> {
   final LoginController _loginController = Get.put(LoginController());
 
   @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  getUser() async {
+    bool userExists = await _loginController.readData();
+    if (userExists == true) {
+      Get.to(const HomeScreen());
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -90,10 +103,10 @@ class _LoginScreeenState extends State<LoginScreeen> {
                           (_loginController.userName.text == "9876543210" &&
                               _loginController.password.text ==
                                   "password123")) {
+                        _loginController.saveData();
                         Get.to(const HomeScreen());
                       } else {
                         Get.snackbar("user_not_valid".tr, "");
-                        Get.to(const HomeScreen());
                       }
                     },
                     child: Card(
