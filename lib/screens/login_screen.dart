@@ -104,6 +104,7 @@ class _LoginScreeenState extends State<LoginScreeen> {
                               _loginController.password.text ==
                                   "password123")) {
                         _loginController.saveData();
+                        Navigator.pop(context);
                         Get.to(const HomeScreen());
                       } else {
                         Get.snackbar("user_not_valid".tr, "");
